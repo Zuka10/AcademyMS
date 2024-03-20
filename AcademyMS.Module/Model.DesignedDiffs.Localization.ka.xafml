@@ -1,0 +1,733 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="Delete Item" Caption="ნივთის წაშლა" />
+      <Action Id="HideItemsFromDashboard" Caption="დამალეთ დაფადან" ToolTip="მონიშნული ნივთების დამალვა დაფადან" />
+      <Action Id="Logon" ToolTip="შესვლა" Caption="შესვლა" />
+      <Action Id="ShowItemsOnDashboard" Caption="აჩვენე დაფაზე" />
+    </Actions>
+    <ActionToContainerMapping>
+      <ActionContainer Id="View" Caption="ნახვა" />
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="AcademyMS.Module.BusinessObjects.Coach" Caption="მწვრთნელი">
+      <OwnMembers>
+        <Member Name="Age" Caption="ასაკი" />
+        <Member Name="BirthDate" Caption="დაბადების თარიღი" />
+        <Member Name="FirstName" Caption="სახელი" />
+        <Member Name="LastName" Caption="გვარი" />
+        <Member Name="PersonalNumber" Caption="პირადი ნომერი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AcademyMS.Module.BusinessObjects.Player" Caption="მოთამაშე">
+      <OwnMembers>
+        <Member Name="Age" Caption="ასაკი" />
+        <Member Name="BirthDate" Caption="დაბადების თარიღი" />
+        <Member Name="FirstName" Caption="სახელი" />
+        <Member Name="LastName" Caption="გვარი" />
+        <Member Name="Note" Caption="შენიშვნა" />
+        <Member Name="ParentName" Caption="მშობლის სახელი" />
+        <Member Name="ParentPhoneNumber" Caption="მშობლის ტელეფონის ნომერი" />
+        <Member Name="PersonalNumber" Caption="პირადი ნომერი" />
+        <Member Name="Team" Caption="გუნდი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="AcademyMS.Module.BusinessObjects.Team" Caption="გუნდი">
+      <OwnMembers>
+        <Member Name="Coach" Caption="მწვრთნელი" />
+        <Member Name="Name" Caption="სახელი" />
+        <Member Name="Players" Caption="ფეხბურთელები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.Security.ProceedMember">
+      <OwnMembers>
+        <Member Name="Name" Caption="სახელი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.Security.SecurityDiagnosticInfoObject">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+        <Member Name="TargetType" Caption="სამიზნე ტიპი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.DashboardCreationInfo">
+      <OwnMembers>
+        <Member Name="DashboardName" Caption="სახელი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.DashboardName">
+      <OwnMembers>
+        <Member Name="Name" Caption="სახელი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.StaticTextDashboardOrganizationItem">
+      <OwnMembers>
+        <Member Name="Text" Caption="ტექსტი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.SystemModule.ViewDashboardOrganizationItem" Caption="ნახვა">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+        <Member Name="ObjectType" Caption="ობიექტის ტიპი" />
+        <Member Name="ViewDescriptor" Caption="ნახვა" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.Validation.AllContextsView.DisplayableValidationResultItem" Caption="Validation დეტალები">
+      <OwnMembers>
+        <Member Name="ContextCaption" Caption="კონტექსტური წარწერა" />
+        <Member Name="ErrorMessage" Caption="შეცდომის შეტყობინება" />
+        <Member Name="Rule" Caption="წესი" />
+        <Member Name="RuleName" Caption="წესის სახელი" />
+        <Member Name="TargetCaption" Caption="მიზანი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.ExpressApp.Validation.AllContextsView.ValidationResults" Caption="ვალიდაციის შედეგები">
+      <OwnMembers>
+        <Member Name="HighlightErrors" Caption="პრობლემების ხაზგასმა" />
+        <Member Name="Results" Caption="შედეგები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.ModelDifferenceAspect">
+      <OwnMembers>
+        <Member Name="Name" Caption="სახელი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyMemberPermissionsObject">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyObjectPermissionsObject">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyRoleBase">
+      <OwnMembers>
+        <Member Name="Name" Caption="სახელი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyTypePermissionObject">
+      <OwnMembers>
+        <Member Name="TargetType" Caption="სამიზნე ტიპი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.IRuleBaseProperties">
+      <OwnMembers>
+        <Member Name="CustomMessageTemplate" Caption="მორგებული შეტყობინების შაბლონი" />
+        <Member Name="MessageTemplateSkipNullOrEmptyValues" Caption="შეტყობინების შაბლონი გამოტოვებულია ნულოვანი ან ცარიელი ღირებულებები" />
+        <Member Name="MessageTemplateTargetDoesNotSatisfyTargetCriteria" Caption="შეტყობინების შაბლონის სამიზნე არ აკმაყოფილებს სამიზნე კრიტერიუმებს" />
+        <Member Name="Name" Caption="სახელი" />
+        <Member Name="ResultType" Caption="შედეგის ტიპი" />
+        <Member Name="SkipNullOrEmptyValues" Caption="გამოტოვეთ ნულოვანი ან ცარიელი მნიშვნელობები" />
+        <Member Name="TargetCriteria" Caption="სამიზნე კრიტერიუმები" />
+        <Member Name="TargetType" Caption="სამიზნე ტიპი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.IRuleCriteriaProperties">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.IRuleObjectExistsProperties">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.IRuleRequiredFieldProperties">
+      <OwnMembers>
+        <Member Name="SkipNullOrEmptyValues" Caption="გამოტოვეთ ნულოვანი ან ცარიელი მნიშვნელობები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleBaseProperties">
+      <OwnMembers>
+        <Member Name="CustomMessageTemplate" Caption="მორგებული შეტყობინების შაბლონი" />
+        <Member Name="MessageTemplateSkipNullOrEmptyValues" Caption="შეტყობინების შაბლონი გამოტოვებულია ნულოვანი ან ცარიელი ღირებულებები" />
+        <Member Name="MessageTemplateTargetDoesNotSatisfyTargetCriteria" Caption="შეტყობინების შაბლონის სამიზნე არ აკმაყოფილებს სამიზნე კრიტერიუმებს" />
+        <Member Name="Name" Caption="სახელი" />
+        <Member Name="ResultType" Caption="შედეგის ტიპი" />
+        <Member Name="SkipNullOrEmptyValues" Caption="გამოტოვეთ ნულოვანი ან ცარიელი მნიშვნელობები" />
+        <Member Name="TargetCriteria" Caption="სამიზნე კრიტერიუმები" />
+        <Member Name="TargetType" Caption="სამიზნე ტიპი" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleCriteriaProperties">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleObjectExistsProperties">
+      <OwnMembers>
+        <Member Name="Criteria" Caption="კრიტერიუმები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleSetValidationResult">
+      <OwnMembers>
+        <Member Name="Results" Caption="შედეგები" />
+      </OwnMembers>
+    </Class>
+    <Class Name="DevExpress.Persistent.Validation.RuleSetValidationResultItem" Caption="Validation დეტალები">
+      <OwnMembers>
+        <Member Name="ErrorMessage" Caption="შეცდომის შეტყობინება" />
+        <Member Name="Rule" Caption="წესი" />
+        <Member Name="RuleName" Caption="წესის სახელი" />
+        <Member Name="Target" Caption="მიზანი" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Localization>
+    <LocalizationGroup Name="Captions">
+      <LocalizationItem Name="View" Value="ნახვა" />
+    </LocalizationGroup>
+    <LocalizationGroup Name="DashboardOrganizationItems">
+      <LocalizationItem Name="StaticText" Value="ტექსტი" />
+    </LocalizationGroup>
+    <LocalizationGroup Name="Exceptions">
+      <LocalizationGroup Name="UserVisibleExceptions">
+        <LocalizationGroup Name="Validation">
+          <LocalizationItem Name="ActionErrorMessageHeaderFormat" Value="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+          <LocalizationItem Name="AllContextsErrorMessageHeader" Value="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+          <LocalizationItem Name="DeleteErrorMessageHeader" Value="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+          <LocalizationItem Name="SaveErrorMessageHeader" Value="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+        </LocalizationGroup>
+      </LocalizationGroup>
+    </LocalizationGroup>
+  </Localization>
+  <NavigationItems>
+    <Items>
+      <Item Id="@5170e720-7246-4c2a-9b66-a02a3cfdbd65" Caption="მთავარი" />
+    </Items>
+  </NavigationItems>
+  <Views>
+    <DetailView Id="ActionContainerDashboardOrganizationItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ActionContainerDescriptor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ApplicationUser_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ApplicationUserLoginInfo_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="AuthenticationStandardLogonParameters_Blazor_DetailView" Caption="შესვლა">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="AuthenticationStandardLogonParameters_DetailView" Caption="შესვლა">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="AuthenticationStandardLogonParameters_Win_DetailView" Caption="შესვლა">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი">
+          <LayoutGroup Id="RootGroup">
+            <LayoutGroup Id="EditorsGroup">
+              <LayoutGroup Id="Text" Caption="ტექსტი" />
+            </LayoutGroup>
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="BaseObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ChangePasswordOnLogonParameters_Blazor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ChangePasswordOnLogonParameters_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ChangePasswordParameters_Blazor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ChangePasswordParameters_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="Coach_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Coach" Caption="მწვრთნელი" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="ContextValidationResult_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="CriteriaProvider_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DashboardCreationInfo_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DashboardName_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DashboardOrganizationItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DashboardOrganizer_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DashboardViewItemDescriptor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DiagnosticInfoObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="DisplayableValidationResultItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="FileAttachmentBase_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="FileData_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleBaseProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleCollectionPropertyProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleCombinationOfPropertiesIsUniqueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleCriteriaProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleFromBoolPropertyProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleIsReferencedProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleNavigationPermissionProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleObjectExistsProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRulePropertyValueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleRangeProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleRegularExpressionProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleRequiredFieldProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleSearchObjectProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleStringComparisonProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleSupportsCollectionAggregatesProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleUniqueValueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="IRuleValueComparisonProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <ListView Id="ModelDifference_Aspects_ListView">
+      <Columns>
+        <ColumnInfo Id="DisplayName" Caption="სახელი" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ModelDifference_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ModelDifferenceAspect_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ModelDifferenceCopyParameters_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="NavigationPermissionRuleObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="NonPersistentBaseObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="NonPersistentLiteObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyActionPermissionObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyMemberPermissionsObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyNavigationPermissionObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyObjectPermissionsObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyRole_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyRoleBase_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyTypePermissionObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="PermissionPolicyUser_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="Player_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Player" Caption="მოთამაშე" />
+          </LayoutGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="PostponeTime_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ProceedMember_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ResetPasswordParameters_Blazor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ResetPasswordParameters_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleBaseProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleCombinationOfPropertiesIsUniqueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleCriteriaProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleFromBoolPropertyProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleIsReferencedProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleNavigationPermissionProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleObjectExistsProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RulePropertyValueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleRangeProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleRegularExpressionProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleRequiredFieldProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleSearchObjectProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleSetValidationResult_ByTarget_Error_DetailView">
+      <Items>
+        <StaticText Id="ValidationResultsText" Text="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleSetValidationResult_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleSetValidationResultItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleSetValidationResultItemAggregate_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleStringComparisonProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleUniqueValueProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="RuleValueComparisonProperties_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="SecuredActionDescriptor_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="SecurityDiagnosticInfoObject_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი">
+          <TabbedGroup Id="Tabs1">
+            <LayoutGroup Id="DebugCriteria" Caption="კრიტერიუმები" />
+          </TabbedGroup>
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <DetailView Id="StaticImageDashboardOrganizationItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="StaticTextDashboardOrganizationItem_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <ListView Id="StaticTextDashboardOrganizationItem_LookupListView">
+      <Columns>
+        <ColumnInfo Id="Text" Caption="ტექსტი" />
+      </Columns>
+    </ListView>
+    <DetailView Id="Team_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი">
+          <LayoutGroup Id="SimpleEditors">
+            <LayoutGroup Id="Team" Caption="გუნდი" />
+          </LayoutGroup>
+          <LayoutGroup Id="Players_Group" Caption="ფეხბურთელები" />
+        </LayoutGroup>
+      </Layout>
+    </DetailView>
+    <ListView Id="Team_ListView">
+      <Columns>
+        <ColumnInfo Id="Coach" Caption="მწვრთნელი" />
+      </Columns>
+    </ListView>
+    <ListView Id="Team_Players_ListView" Caption="მოთამაშე">
+      <Columns>
+        <ColumnInfo Id="Note" Caption="შენიშვნა" />
+        <ColumnInfo Id="Team" Caption="გუნდი" />
+        <ColumnInfo Id="FirstName" Caption="სახელი" />
+        <ColumnInfo Id="LastName" Caption="გვარი" />
+        <ColumnInfo Id="PersonalNumber" Caption="პირადი ნომერი" />
+        <ColumnInfo Id="BirthDate" Caption="დაბადების თარიღი" />
+        <ColumnInfo Id="Age" Caption="ასაკი" />
+        <ColumnInfo Id="ParentName" Caption="მშობლის სახელი" />
+        <ColumnInfo Id="ParentPhoneNumber" Caption="მშობლის ტელეფონის ნომერი" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ValidationResults_DetailView">
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <ListView Id="ValidationResults_DisplayableValidationResultItems_ListView" Caption="Validation დეტალები">
+      <Columns>
+        <ColumnInfo Id="RuleName" Caption="წესის სახელი" />
+        <ColumnInfo Id="ContextCaption" Caption="კონტექსტური წარწერა" />
+        <ColumnInfo Id="Rule" Caption="წესი" />
+        <ColumnInfo Id="ErrorMessage" Caption="შეცდომის შეტყობინება" />
+        <ColumnInfo Id="TargetCaption" Caption="მიზანი" />
+        <ColumnInfo Id="RuleProperties.Name" Caption="სახელი" />
+        <ColumnInfo Id="RuleProperties.CustomMessageTemplate" Caption="მორგებული შეტყობინების შაბლონი" />
+        <ColumnInfo Id="RuleProperties.TargetType" Caption="სამიზნე ტიპი" />
+        <ColumnInfo Id="RuleProperties.ResultType" Caption="შედეგის ტიპი" />
+        <ColumnInfo Id="RuleProperties.SkipNullOrEmptyValues" Caption="გამოტოვეთ ნულოვანი ან ცარიელი მნიშვნელობები" />
+        <ColumnInfo Id="RuleProperties.MessageTemplateSkipNullOrEmptyValues" Caption="შეტყობინების შაბლონი გამოტოვებულია ნულოვანი ან ცარიელი ღირებულებები" />
+        <ColumnInfo Id="RuleProperties.MessageTemplateTargetDoesNotSatisfyTargetCriteria" Caption="შეტყობინების შაბლონის სამიზნე არ აკმაყოფილებს სამიზნე კრიტერიუმებს" />
+        <ColumnInfo Id="RuleProperties.TargetCriteria" Caption="სამიზნე კრიტერიუმები" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ValidationResults_Error_DetailView">
+      <Items>
+        <StaticText Id="ValidationResultsText" Text="მონაცემთა ვალიდაციის შეცდომა: გთხოვთ გადახედოთ და შეასწოროთ ქვემოთ ჩამოთვლილი მონაცემთა ვალიდაციის შეცდომა (ებ) ი გასაგრძელებლად." />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <ListView Id="ValidationResults_LookupListView">
+      <Columns>
+        <ColumnInfo Id="HighlightErrors" Caption="პრობლემების ხაზგასმა" />
+      </Columns>
+    </ListView>
+    <DetailView Id="ValidationResults_Passed_DetailView" Caption="ვალიდაციის შედეგები">
+      <Items>
+        <PropertyEditor Id="Results" Caption="შედეგები" />
+        <StaticText Id="ValidationResultsText" Text="პრობლემები არ გამოვლენილა." />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+    <DetailView Id="ViewDashboardOrganizationItem_DetailView">
+      <Items>
+        <PropertyEditor Id="Criteria" Caption="კრიტერიუმები" />
+        <PropertyEditor Id="ObjectType" Caption="ობიექტის ტიპი" />
+        <PropertyEditor Id="ViewDescriptor" Caption="ნახვა" />
+      </Items>
+      <Layout>
+        <LayoutGroup Id="Main" Caption="მთავარი" />
+      </Layout>
+    </DetailView>
+  </Views>
+</Application>

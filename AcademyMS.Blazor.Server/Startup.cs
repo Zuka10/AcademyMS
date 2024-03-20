@@ -1,18 +1,18 @@
-﻿using DevExpress.ExpressApp.Security;
+﻿using AcademyMS.Blazor.Server.Services;
 using DevExpress.ExpressApp.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.ApplicationBuilder;
 using DevExpress.ExpressApp.Blazor.Services;
-using DevExpress.Persistent.Base;
+using DevExpress.ExpressApp.Security;
+using DevExpress.Persistent.BaseImpl.PermissionPolicy;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Components.Server.Circuits;
-using DevExpress.ExpressApp.Xpo;
-using AcademyMS.Blazor.Server.Services;
-using DevExpress.Persistent.BaseImpl.PermissionPolicy;
 
 namespace AcademyMS.Blazor.Server;
 
-public class Startup {
-    public Startup(IConfiguration configuration) {
+public class Startup
+{
+    public Startup(IConfiguration configuration)
+    {
         Configuration = configuration;
     }
 
@@ -20,27 +20,32 @@ public class Startup {
 
     // This method gets called by the runtime. Use this method to add services to the container.
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-    public void ConfigureServices(IServiceCollection services) {
+    public void ConfigureServices(IServiceCollection services)
+    {
         services.AddSingleton(typeof(Microsoft.AspNetCore.SignalR.HubConnectionHandler<>), typeof(ProxyHubConnectionHandler<>));
 
         services.AddRazorPages();
         services.AddServerSideBlazor();
         services.AddHttpContextAccessor();
         services.AddScoped<CircuitHandler, CircuitHandlerProxy>();
-        services.AddXaf(Configuration, builder => {
+        services.AddXaf(Configuration, builder =>
+        {
             builder.UseApplication<AcademyMSBlazorApplication>();
             builder.Modules
                 .AddConditionalAppearance()
                 .AddFileAttachments()
-                .AddValidation(options => {
+                .AddValidation(options =>
+                {
                     options.AllowValidationDetailsAccess = false;
                 })
                 .Add<AcademyMS.Module.AcademyMSModule>()
-            	.Add<AcademyMSBlazorModule>();
+                .Add<AcademyMSBlazorModule>();
             builder.ObjectSpaceProviders
-                .AddSecuredXpo((serviceProvider, options) => {
+                .AddSecuredXpo((serviceProvider, options) =>
+                {
                     string connectionString = null;
-                    if(Configuration.GetConnectionString("ConnectionString") != null) {
+                    if (Configuration.GetConnectionString("ConnectionString") != null)
+                    {
                         connectionString = Configuration.GetConnectionString("ConnectionString");
                     }
 #if EASYTEST
@@ -55,7 +60,8 @@ public class Startup {
                 })
                 .AddNonPersistent();
             builder.Security
-                .UseIntegratedMode(options => {
+                .UseIntegratedMode(options =>
+                {
                     options.Lockout.Enabled = true;
 
                     options.RoleType = typeof(PermissionPolicyRole);
@@ -66,7 +72,8 @@ public class Startup {
                     // If you use PermissionPolicyUser or a custom user type, comment out the following line:
                     options.UserLoginInfoType = typeof(AcademyMS.Module.BusinessObjects.ApplicationUserLoginInfo);
                     options.UseXpoPermissionsCaching();
-                    options.Events.OnSecurityStrategyCreated += securityStrategy => {
+                    options.Events.OnSecurityStrategyCreated += securityStrategy =>
+                    {
                         // Use the 'PermissionsReloadMode.NoCache' option to load the most recent permissions from the database once
                         // for every Session instance when secured data is accessed through this instance for the first time.
                         // Use the 'PermissionsReloadMode.CacheOnFirstAccess' option to reduce the number of database queries.
@@ -76,21 +83,26 @@ public class Startup {
                         ((SecurityStrategy)securityStrategy).PermissionsReloadMode = PermissionsReloadMode.NoCache;
                     };
                 })
-                .AddPasswordAuthentication(options => {
+                .AddPasswordAuthentication(options =>
+                {
                     options.IsSupportChangePassword = true;
                 });
         });
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => {
+        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
+        {
             options.LoginPath = "/LoginPage";
         });
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-    public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
-        if(env.IsDevelopment()) {
+    public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    {
+        if (env.IsDevelopment())
+        {
             app.UseDeveloperExceptionPage();
         }
-        else {
+        else
+        {
             app.UseExceptionHandler("/Error");
             // The default HSTS value is 30 days. To change this for production scenarios, see: https://aka.ms/aspnetcore-hsts.
             app.UseHsts();
@@ -102,7 +114,8 @@ public class Startup {
         app.UseAuthentication();
         app.UseAuthorization();
         app.UseXaf();
-        app.UseEndpoints(endpoints => {
+        app.UseEndpoints(endpoints =>
+        {
             endpoints.MapXafEndpoints();
             endpoints.MapBlazorHub();
             endpoints.MapFallbackToPage("/_Host");

@@ -74,6 +74,14 @@ public class Player : BaseObject
         set { SetPropertyValue(nameof(Team), ref _team, value); }
     }
 
+    private string _note;
+    [Size(SizeAttribute.Unlimited)]
+    public string Note
+    {
+        get { return _note; }
+        set { SetPropertyValue(nameof(Note), ref _note, value); }
+    }
+
     private void CalculateAge()
     {
         Age = DateTime.Today.Year - BirthDate.Year;

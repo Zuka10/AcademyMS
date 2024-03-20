@@ -1,12 +1,52 @@
-﻿<?xml version="1.0" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="AcademyMS">
   <BOModel>
+    <Class Name="AcademyMS.Module.BusinessObjects.Coach" DefaultDetailViewImage="BO_Employee" DefaultListViewImage="BO_Employee" ImageName="BO_Employee" />
+    <Class Name="AcademyMS.Module.BusinessObjects.Player" DefaultDetailViewImage="BO_Resume" DefaultListViewImage="BO_Resume" ImageName="BO_Resume" />
+    <Class Name="AcademyMS.Module.BusinessObjects.Team" DefaultDetailViewImage="State_ItemVisibility_Show" DefaultListViewImage="State_ItemVisibility_Show" ImageName="State_ItemVisibility_Show" />
     <Class Name="DevExpress.Persistent.BaseImpl.PermissionPolicy.PermissionPolicyUser" Caption="Base User" />
   </BOModel>
+  <Localization>
+    <LocalizationGroup Name="DialogButtons">
+      <LocalizationItem Name="Add" Value="Add" />
+    </LocalizationGroup>
+  </Localization>
+  <NavigationItems>
+    <Items>
+      <Item Id="@5170e720-7246-4c2a-9b66-a02a3cfdbd65" Caption="Main" ImageName="BO_Resume" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Coach_ListView" ViewId="Coach_ListView" ObjectKey="" ImageName="BO_Employee" IsNewNode="True" />
+          <Item Id="Player_ListView" ViewId="Player_ListView" ObjectKey="" ImageName="BO_Resume" IsNewNode="True" />
+          <Item Id="Team_ListView" ViewId="Team_ListView" ObjectKey="" ImageName="State_ItemVisibility_Show" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Caption="System" ImageName="ProtectedContent">
+        <Items>
+          <Item Id="Coach_ListView" ImageName="BO_Employee" Removed="True" />
+          <Item Id="Player_ListView" ImageName="User_32x32" Removed="True" />
+          <Item Id="Team_ListView" ImageName="Team_32x32" Removed="True" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
   <Options>
     <LayoutManagerOptions RequiredFieldMark="*" />
   </Options>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="23.2.4.0" IsNewNode="True" />
+  </SchemaModules>
   <Views>
     <ListView Id="ApplicationUser_ListView" Caption="Users" />
+    <DetailView Id="Coach_DetailView" ImageName="BO_Employee" />
+    <ListView Id="Coach_ListView" ImageName="BO_Employee" />
+    <ListView Id="Coach_LookupListView" ImageName="BO_Employee" />
+    <ListView Id="Coach_Teams_ListView" ImageName="State_ItemVisibility_Show" />
+    <DetailView Id="Player_DetailView" ImageName="BO_Resume" />
+    <ListView Id="Player_ListView" ImageName="BO_Resume" />
+    <ListView Id="Player_LookupListView" ImageName="BO_Resume" />
+    <DetailView Id="Team_DetailView" ImageName="State_ItemVisibility_Show" />
+    <ListView Id="Team_ListView" ImageName="State_ItemVisibility_Show" />
+    <ListView Id="Team_LookupListView" ImageName="State_ItemVisibility_Show" />
+    <ListView Id="Team_Players_ListView" ImageName="BO_Resume" />
   </Views>
 </Application>
