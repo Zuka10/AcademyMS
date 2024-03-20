@@ -1,4 +1,5 @@
 ﻿using DevExpress.DirectX.Common.Direct2D;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
@@ -85,5 +86,10 @@ public class Player : BaseObject
     private void CalculateAge()
     {
         Age = DateTime.Today.Year - BirthDate.Year;
+        if (BirthDate.Year > DateTime.Today.Year)
+        {
+            Age = 0;
+            throw new UserFriendlyException("Birth date cannot be more than actual date");
+        }
     }
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Application Title="AcademyMS">
+<Application Title="AcademyMS" PreferredLanguage="ka">
   <BOModel>
     <Class Name="AcademyMS.Module.BusinessObjects.Coach" DefaultDetailViewImage="BO_Employee" DefaultListViewImage="BO_Employee" ImageName="BO_Employee" />
     <Class Name="AcademyMS.Module.BusinessObjects.Player" DefaultDetailViewImage="BO_Resume" DefaultListViewImage="BO_Resume" ImageName="BO_Resume" />

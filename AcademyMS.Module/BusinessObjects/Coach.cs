@@ -1,4 +1,5 @@
-﻿using DevExpress.ExpressApp.Model;
+﻿using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Model;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
@@ -60,5 +61,10 @@ public class Coach : BaseObject
     private void CalculateAge()
     {
         Age = DateTime.Today.Year - BirthDate.Year;
+        if (BirthDate.Year > DateTime.Today.Year)
+        {
+            Age = 0;
+            throw new UserFriendlyException("Birth date cannot be more than actual date");
+        }
     }
 }
